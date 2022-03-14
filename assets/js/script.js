@@ -6,13 +6,20 @@ var taskFormHandler = function (event) {
   var taskNameInput = document.querySelector("input[name='task-name']").value;
   var taskTypeInput = document.querySelector("select[name='task-type']").value;
 
-  // package up data as an object
+  // check if input values are empty strings
+if (!taskNameInput || !taskTypeInput) {
+    alert("You need to fill out the task form!");
+    return false;
+  }
+  formEl.reset(); //resets form for the next task
+  
+  // package up data as an object  **lexical scoping
   var taskDataObj = {
     name: taskNameInput,
     type: taskTypeInput
   };
 
-  // send it as an argument to createTaskEl
+  // send it as an argument to createTaskEl **lexical scoping
   createTaskEl(taskDataObj);
 }
 
@@ -26,6 +33,8 @@ var createTaskEl = function(taskDataObj){
  taskInfoEl.className = "task-info";
 
  // add HTML content to div
+
+ //*lexical scoping
  // old line when there was only one funcion taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskNameInput + "</h3><span class='task-type'>" + taskTypeInput + "</span>";
  // new/updated line:
  taskInfoEl.innerHTML = 
